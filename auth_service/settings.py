@@ -1,3 +1,11 @@
+SPECTACULAR_SETTINGS = {
+	"TITLE": "Auth Service API",
+	"DESCRIPTION": "API documentation for the authentication service.",
+	"VERSION": "1.0.0",
+	"SERVE_INCLUDE_SCHEMA": False,
+	"SWAGGER_UI_DIST": "https://cdn.jsdelivr.net/npm/swagger-ui-dist@4.15.5",
+	"REDOC_DIST": "https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js",
+}
 import os
 from pathlib import Path
 
@@ -67,4 +75,6 @@ REST_FRAMEWORK = {
 	'DEFAULT_AUTHENTICATION_CLASSES': (
 		'rest_framework_simplejwt.authentication.JWTAuthentication',
 	),
+	'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+

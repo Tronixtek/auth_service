@@ -150,4 +150,4 @@ docker-compose down
 
 ## Notes
 - All backend endpoints are tested using Postman or similar tools.
-- No frontend is included;
+- No frontend is included.

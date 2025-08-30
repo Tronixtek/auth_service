@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: auth-service
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn auth_service.wsgi:application --bind 0.0.0.0:8000"
+    autoDeploy: true
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: auth_service.settings
+      - key: SECRET_KEY
+        value: changeme
+      - key: DEBUG
+        value: False
+      - key: POSTGRES_DB
+        value: auth_db
+      - key: POSTGRES_USER
+        value: auth_user
+      - key: POSTGRES_PASSWORD
+        value: auth_pass
+      - key: DB_HOST
+        value: render-postgres
+      - key: DB_PORT
+        value: 5432
