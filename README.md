@@ -40,6 +40,60 @@ A simple authentication system using **Django + DRF**, with:
 	 - Admin panel: [http://localhost:8000/admin/](http://localhost:8000/admin/)
 	 - Swagger docs: `/api/docs/` (if enabled)
 
+
+
+
+#
+## Running Locally Without Docker
+
+You can run this project directly on your machine without Docker. Follow these steps:
+
+1. **Install Python (3.11+)**
+	- Download from https://www.python.org/downloads/
+
+2. **Install PostgreSQL and Redis**
+	- PostgreSQL: https://www.postgresql.org/download/
+	- Redis: https://redis.io/download
+
+3. **Create and activate a virtual environment**
+	```powershell
+	python -m venv venv
+	venv\Scripts\activate
+	```
+
+4. **Install dependencies**
+	```powershell
+	pip install -r requirements.txt
+	```
+
+5. **Set environment variables**
+	- Create a `.env` file in your project root with:
+	  ```
+	  DATABASE_URL=postgres://auth_user:auth_pass@localhost:5432/auth_db
+	  REDIS_URL=redis://localhost:6379/0
+	  SECRET_KEY=ThisKeymustbeStrongForittoworkSecurely12345
+	  DEBUG=True
+	  ```
+	- Make sure your database and Redis are running and credentials match your local setup.
+
+6. **Apply migrations**
+	```powershell
+	python manage.py migrate
+	```
+
+7. **Create a superuser (admin login)**
+	```powershell
+	python manage.py createsuperuser
+	```
+
+8. **Run the server**
+	```powershell
+	python manage.py runserver
+	```
+	- Access at [http://localhost:8000](http://localhost:8000)
+
+
+
 ## API Endpoints
 - `POST /api/auth/register/` — Register a new user
 - `POST /api/auth/login/` — Login and get JWT tokens
@@ -96,4 +150,4 @@ docker-compose down
 
 ## Notes
 - All backend endpoints are tested using Postman or similar tools.
-- No frontend is included; you can build one separately if needed.
+- No frontend is included;
