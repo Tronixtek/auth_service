@@ -1,3 +1,13 @@
+# Redis cache configuration for Railway
+CACHES = {
+	'default': {
+		'BACKEND': 'django_redis.cache.RedisCache',
+		'LOCATION': os.environ.get('REDIS_URL', 'redis://localhost:6379/1'),
+		'OPTIONS': {
+			'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+		}
+	}
+}
 SPECTACULAR_SETTINGS = {
 	"TITLE": "Auth Service API",
 	"DESCRIPTION": "API documentation for the authentication service.",
@@ -11,8 +21,10 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'changeme')
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+import os
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'changeme')
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
@@ -56,20 +68,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'auth_service.wsgi.application'
 
+import dj_database_url
+
 DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.postgresql',
-		'NAME': os.environ.get('POSTGRES_DB', 'auth_db'),
-		'USER': os.environ.get('POSTGRES_USER', 'auth_user'),
-		'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'auth_pass'),
-		'HOST': os.environ.get('DB_HOST', 'db'),
-		'PORT': os.environ.get('DB_PORT', '5432'),
-	}
+	'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
 
 AUTH_USER_MODEL = 'users.User'
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# For Railway deployment
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '*').split(',')
 
 REST_FRAMEWORK = {
 	'DEFAULT_AUTHENTICATION_CLASSES': (
