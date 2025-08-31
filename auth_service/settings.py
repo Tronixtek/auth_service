@@ -1,3 +1,4 @@
+import os
 # Redis cache configuration for Railway
 CACHES = {
 	'default': {
@@ -16,12 +17,9 @@ SPECTACULAR_SETTINGS = {
 	"SWAGGER_UI_DIST": "https://cdn.jsdelivr.net/npm/swagger-ui-dist@4.15.5",
 	"REDOC_DIST": "https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js",
 }
-import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-import os
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'changeme')
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
