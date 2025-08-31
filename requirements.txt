@@ -4,5 +4,6 @@ djangorestframework-simplejwt
 psycopg2-binary
 redis
 django-environ
+dj-database-url
 drf-spectacular
 drf-spectacular[swagger-ui]
