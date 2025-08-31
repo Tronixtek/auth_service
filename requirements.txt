@@ -3,6 +3,7 @@ djangorestframework
 djangorestframework-simplejwt
 psycopg2-binary
 redis
+django-redis
 django-environ
 dj-database-url
 drf-spectacular
